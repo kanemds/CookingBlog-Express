@@ -1,0 +1,21 @@
+:root {
+  --bs-font-sans-serif: "Ubuntu", sans-serif;
+}
+
+body h1.logo {
+  color: red;
+  font-weight: 500;
+}
+
+.container-xxl {
+  max-width: 90%;
+}
+
+body {
+  background-color: rgb(54, 20, 47);
+  background-image: url("/img/bg.jpg");
+}
+
+a {
+  color: var(--bs--dark);
+}
