@@ -70,13 +70,38 @@ const searchRecipe = async (req, res) => {
 }
 
 
+const findLatest = async (req, res) => {
+  try {
+    const limitNumber = 20
+    const recipe = await Recipe.find({}).sort({_id: -1}).limit(limitNumber)
+    res.render('latest', { title: 'Latest', recipe } )
+  } catch (error) {
+    res.status(500).send({ message: error.message || "Error Occured" })
+  }
+}
+
+
+const findRandom = async (req, res) => {
+  try {
+   let count = await Recipe.find().countDocuments()
+   let random = Math.floor(Math.random()* count)
+   let recipe = await Recipe.findOne().skip(random).exec()
+    res.render('random', { title: 'Random', recipe } )
+  } catch (error) {
+    res.status(500).send({ message: error.message || "Error Occured" })
+  }
+}
+
+
 
 module.exports = { 
   homepage,
   allCategories,
   viewRecipe,
   allCategoriesById,
-  searchRecipe
+  searchRecipe,
+  findLatest,
+  findRandom
 }
 
 

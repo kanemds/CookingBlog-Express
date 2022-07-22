@@ -9,6 +9,8 @@ router.get('/recipe/:id', recipeController.viewRecipe)
 router.get('/categories', recipeController.allCategories)
 router.get('/categories/:id', recipeController.allCategoriesById)
 router.post('/search',recipeController.searchRecipe)
+router.get('/latest', recipeController.findLatest)
+router.get('/random', recipeController.findRandom)
 
 
 
