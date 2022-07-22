@@ -28,6 +28,8 @@ const recipeSchema = new mongoose.Schema({
   }
 })
 
+recipeSchema.index({ name: 'text', descriptioin: 'text' })
+
 
 const recipe = mongoose.model('Recipe', recipeSchema)
  
