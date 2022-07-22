@@ -8,3 +8,4 @@ db.once('open', () => {
 })
 
 require('./Category')
+require('./Recipe')
