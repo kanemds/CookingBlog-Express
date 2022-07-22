@@ -19,6 +19,17 @@ const homepage = async (req, res) => {
 }
 
 
+const allCategoriesById = async (req, res) => {
+
+  try {
+    let categoryId = req.params.id
+    const limitNumber = 20
+    const categoryById = await Recipe.find({'category': categoryId}).limit(limitNumber)
+    res.render('categories', { title: 'Categories', categoryById } )
+  } catch (error) {
+    res.status(500).send({ message: error.message || "Error Occured" })
+  }
+}
 
 
 
@@ -31,6 +42,33 @@ const allCategories = async (req, res) => {
     res.status(500).send({ message: error.message || "Error Occured" })
   }
 }
+
+
+
+
+const viewRecipe = async (req, res) => {
+  try {
+    //get id 
+    let recipeId = req.params.id
+    
+    const recipe = await Recipe.findById(recipeId)
+    res.render('recipe', { title: 'Recipe', recipe } )
+  } catch (error) {
+    res.status(500).send({ message: error.message || "Error Occured" })
+  }
+}
+
+
+module.exports = { 
+  homepage,
+  allCategories,
+  viewRecipe,
+  allCategoriesById
+}
+
+
+
+
 
 
 
@@ -221,7 +259,49 @@ const allCategories = async (req, res) => {
 
 // insertRecipeData()
 
-module.exports = { 
-  homepage,
-  allCategories
-}
+
+
+
+
+
+
+
+// const insertCategoryData = async () => {
+//       try {
+//         await Category.insertMany([
+//         {
+//           "name": "Sushi",
+//           "image": "sushi.jpg"
+//         },   
+//         {
+//           "name": "Ramen",
+//           "image": "remen.jpg"
+//         },
+//         {
+//           "name": "Seafood",
+//           "image": "seafood.jpg"
+//         },
+//         {
+//           "name": "Burger",
+//           "image": "burgers.jpg"
+//         },
+//         {
+//           "name": "Chinese food",
+//           "image": "duck.jpg"
+//         },
+//         {
+//           "name": "Pizza",
+//           "image": "pizza.jpg"
+//         },
+
+
+//         ]
+
+//         )
+//               } catch (error) {
+//                       console.log(error)
+//             }
+//         }
+
+// insertCategoryData()
+

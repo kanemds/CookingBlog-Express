@@ -4,8 +4,10 @@ const recipeController = require('../controllers/recipeController')
 
 
 router.get('/', recipeController.homepage)
-router.get('/categories', recipeController.allCategories)
 
+router.get('/recipe/:id', recipeController.viewRecipe)
+router.get('/categories', recipeController.allCategories)
+router.get('/categories/:id', recipeController.allCategoriesById)
 
 
 
