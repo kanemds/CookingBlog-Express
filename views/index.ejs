@@ -4,9 +4,9 @@
   </div>
 
   <div class="col-12 col-lg-6">
-    <h1 class="display-5 fw-bold mb-3">Happy & Healthy</h1>
+    <h1 class="display-5 fw-bold mb-3">Lovely & Healthy</h1>
       <p class="lead">
-        What makes you happy than cooking with the love one?
+        What else is better than cooking with the love one?
       </p>
       <p class="lead">
         Let's share your recipe!          
@@ -26,48 +26,16 @@
   </div>
   
   <div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-3 py-4">
-
-    <a href="#" class="col text-center category__link">
-      <div class="category__img shadow">
-        <img src="img/sushi.jpg" alt="sushi" loading="lazy">
-      </div>
-      <div class="pt-1">Sushi</div>
-    </a>
-
-    <a href="#" class="col text-center category__link">
-      <div class="category__img shadow">
-        <img src="img/ramen.jpg" alt="Ramen" loading="lazy">
-      </div>
-      <div class="pt-1">Ramen</div>
-    </a>
-
-    <a href="#" class="col text-center category__link">
-      <div class="category__img shadow">
-        <img src="img/seafood.jpg" alt="Seafood" loading="lazy">
-      </div>
-      <div class="pt-1">Seafood</div>
-    </a>
-
-    <a href="#" class="col text-center category__link">
-      <div class="category__img shadow">
-        <img src="img/burgers.jpg" alt="burgers" loading="lazy">
-      </div>
-      <div class="pt-1">Burgers</div>
-    </a>
-
-    <a href="#" class="col text-center category__link">
-      <div class="category__img shadow">
-        <img src="img/duck.jpg" alt="Beijing Duck" loading="lazy">
-      </div>
-      <div class="pt-1">Beijing Duck</div>
-    </a>
-
-    <a href="#" class="col text-center category__link">
-      <div class="category__img shadow">
-        <img src="img/pizza.jpg" alt="Pizza" loading="lazy">
-      </div>
-      <div class="pt-1">Pizza</div>
-    </a>
+    <% if ( categories !== "") {%>
+      <% for ( category of categories ) { %>
+        <a href="/categories/<%= category.name %>" class="col text-center category__link">
+          <div class="category__img shadow">
+            <img src="img/<%= category.image %>" alt="<%= category.name %>" loading="lazy">
+          </div>
+          <div class="pt-1"><%= category.name %></div>
+        </a>
+      <% } %>
+    <% } %>
   </div>
 </div>
 
