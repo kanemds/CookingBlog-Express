@@ -94,6 +94,66 @@ const findRandom = async (req, res) => {
 
 
 
+const submitRecipe = async (req, res) => {
+  try {
+    const infoErrorsObj = req.flash('infoErrors')
+    const infoSubmitObj = req.flash('infoSubmit')
+    res.render('submitRecipe', { title: 'submit-recipe' , infoErrorsObj, infoSubmitObj} )
+  } catch (error) {
+    res.status(500).send({ message: error.message || "Error Occured" })
+  }
+}
+
+const onSubmitRecipe = async (req, res) => {
+  try {
+
+    let imageUploadFile
+    let uploadPath
+    let newImageName
+    
+    if (!req.files || Object.keys(req.files).length === 0) {
+      console.log('No File uploaded')
+    } else {
+      imageUploadFile = req.files.image
+      newImageName = Date.now() + imageUploadFile.name
+      uploadPath = require('path').resolve('./') + '/public/uploads/' + newImageName
+
+      imageUploadFile.mv(uploadPath, (err) => {
+        if (err) return res.status(500).send(err)
+      })
+    }
+
+
+    const newRecipe = new Recipe( {
+
+      name: req.body.name,
+      description: req.body.description ,
+      email: req.body.email,
+      ingredients:req.body.ingredients ,
+      category:req.body.category,
+      image: newImageName
+    })
+
+    await newRecipe.save()
+
+    req.flash('infoSubmit', 'Recipe has been added')
+    res.redirect('/submit-recipe')
+  } catch (error) {
+    req.flash('infoErrors', error)
+    res.redirect('/submit-recipe')
+  }
+}
+
+// const updateRecipe = async () => {
+//   try {
+//     const res = await Recipe.updateOne({name: 'New Recipe'}, {name: 'New Recipe Updated'})
+//     res.n // Number of documents matched
+//     res.nModified // Number of documents modified
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
+
 module.exports = { 
   homepage,
   allCategories,
@@ -101,7 +161,10 @@ module.exports = {
   allCategoriesById,
   searchRecipe,
   findLatest,
-  findRandom
+  findRandom,
+  submitRecipe,
+  onSubmitRecipe,
+
 }
 
 
